@@ -1,0 +1,11 @@
+# Rosewood
+
+Requires: Mootools 1.2.4+	
+
+Author: mike joseph <josephm5@msu.edu>
+
+License: MIT License <http://www.opensource.org/licenses/mit-license.php>
+
+The State News standardized javascript UI library. Some items are based on jQueryUI ports (noted where ported).
+
+You may also be interested in Mooniform <http://github.com/thesnews/Mooniform>
