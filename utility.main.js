@@ -22,6 +22,12 @@ if( !window['Rose'] ) {
 	 * }}})
 	 */
 	
-
+	Element.implement({
+		noSelect: function() {
+			this.onselectstart = this.ondragstart = $lambda( false );
+			this.addEvent( 'mousedown', $lambda( false ) );
+			this.setStyle( '-moz-user-select', 'none' );		
+		}
+	});
 
 })();
