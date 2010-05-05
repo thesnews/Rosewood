@@ -421,7 +421,7 @@ if( !window['Rose'] ) {
 			if( this._options.get( 'submit' ) ) {
 				buttons.push( new Element( 'a', {
 					'href': '#',
-					'class': 'active-button',
+					'class': 'active-button submit',
 					'text': this._options.get( 'submit' ),
 					'events': {
 						'click': this._handleSubmit.bind( this )
@@ -432,7 +432,7 @@ if( !window['Rose'] ) {
 			if( this._options.get( 'cancel' ) ) {
 				buttons.push( new Element( 'a', {
 					'href': '#',
-					'class': 'active-button',
+					'class': 'active-button cancel',
 					'text': this._options.get( 'cancel' ),
 					'events': {
 						'click': this._handleCancel.bind( this )
