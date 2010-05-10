@@ -18,8 +18,8 @@ if( !window['Rose'] ) {
 		
 		_defaultOptions: $H({
 			strokeColor: '#ccc',
-			fill: 'r(0.25, 0.65)#f1f1f1-#dddddd',
-			shadowFill: 'r(0.5, 0.25)#000000-#333333',
+			fill: 'r(0.25, 0.25)#fff-#ccc',
+			shadowFill: 'r(0.5, 0.5)#000-#fff',
 			radius: 12,
 			duration: 500,
 			
@@ -39,6 +39,8 @@ if( !window['Rose'] ) {
 		_shadow: false,
 		_mask: false,
 		
+		_shadowOffset: false,
+		
 		_timer: false,
 		
 		initialize: function(el) {
@@ -54,12 +56,14 @@ if( !window['Rose'] ) {
 			var offsetTop = this._options.get('radius')*3;
 			var offsetLeft = this._options.get('radius')*4;
 			
+			this._shadowOffset = this._options.get('radius')/2;
+			
 			this._paper = new Raphael(this._container, size, size);
 			
 			this._circle = this._paper.circle(offsetLeft, offsetTop, 
 				this._options.get('radius'));
 			this._shadow = this._paper.circle(offsetLeft, offsetTop, 
-				this._options.get('radius')+2);
+				this._options.get('radius')+this._shadowOffset);
 
 			this._shadow.toBack();
 
@@ -69,14 +73,17 @@ if( !window['Rose'] ) {
 				'fill-opacity': 1
 			});
 			this._shadow.attr({
-				'x': this._options.get('radius')+10,
-				'y': this._options.get('radius')+10,
+				'x': this._options.get('radius')+this._shadowOffset,
+				'y': this._options.get('radius')+this._shadowOffset,
 				'stroke': false,
 				'fill': this._options.get('shadowFill'),
-				'fill-opacity': '0.25'
+				'fill-opacity': 0.5
 			});
 
 			if( this._options.get('mask') ) {
+				this._shadow.attr({
+					'fill': 'r(0.5, 0.5)#333-#666'
+				});
 				this._mask = this._paper.rect(0, 0, size-2, size-2, 4);
 				this._mask.attr({
 					'fill': this._options.get('maskFill'),
@@ -120,8 +127,8 @@ if( !window['Rose'] ) {
 				this._options.get('duration'), this._animateDown.bind(this));
 
 			this._shadow.animateWith(this._circle, {
-					'r': (this._options.get('radius')+2)*1.5,
-					'cy': this._options.get('radius')*4
+					'r': (this._options.get('radius')+this._shadowOffset)*1.75,
+					'cy': this._options.get('radius')*3.5
 				}, this._options.get('duration'));
 
 		},
@@ -133,7 +140,7 @@ if( !window['Rose'] ) {
 				this._options.get('duration'));
 
 			this._shadow.animateWith(this._circle, {
-					'r': this._options.get('radius')+2,
+					'r': this._options.get('radius')+this._shadowOffset,
 					'cy': this._options.get('radius')*3
 				}, this._options.get('duration'));
 
