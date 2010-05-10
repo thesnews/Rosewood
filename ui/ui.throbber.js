@@ -17,7 +17,7 @@ if( !window['Rose'] ) {
 	var Throbber = new Class({
 		
 		_defaultOptions: $H({
-			strokeColor: '#ccc',
+			stroke: '#999',
 			fill: 'r(0.25, 0.25)#fff-#ccc',
 			shadowFill: 'r(0.5, 0.5)#000-#fff',
 			radius: 12,
@@ -63,7 +63,7 @@ if( !window['Rose'] ) {
 			this._circle = this._paper.circle(offsetLeft, offsetTop, 
 				this._options.get('radius'));
 			this._shadow = this._paper.circle(offsetLeft, offsetTop, 
-				this._options.get('radius')+this._shadowOffset);
+				this._options.get('radius'));
 
 			this._shadow.toBack();
 
@@ -73,16 +73,15 @@ if( !window['Rose'] ) {
 				'fill-opacity': 1
 			});
 			this._shadow.attr({
-				'x': this._options.get('radius')+this._shadowOffset,
-				'y': this._options.get('radius')+this._shadowOffset,
 				'stroke': false,
 				'fill': this._options.get('shadowFill'),
-				'fill-opacity': 0.5
+				'fill-opacity': 0.25
 			});
 
 			if( this._options.get('mask') ) {
 				this._shadow.attr({
-					'fill': 'r(0.5, 0.5)#333-#666'
+					'fill': 'r(0.5, 0.5)#333-#666',
+					'fill-opacity': 0.2
 				});
 				this._mask = this._paper.rect(0, 0, size-2, size-2, 4);
 				this._mask.attr({
@@ -108,7 +107,7 @@ if( !window['Rose'] ) {
 			this._container.fade('in');
 			this._animateUp();
 			this._timer = setInterval(this._animateUp.bind(this),
-				(this._options.get('duration')*2)+25);
+				(this._options.get('duration')*2)+250);
 		},
 		
 		hide: function() {
@@ -122,12 +121,12 @@ if( !window['Rose'] ) {
 		
 		_animateUp: function() {
 			this._circle.animate({
-					'r': this._options.get('radius')*2
+					'r': this._options.get('radius')*1.25
 				},
 				this._options.get('duration'), this._animateDown.bind(this));
 
 			this._shadow.animateWith(this._circle, {
-					'r': (this._options.get('radius')+this._shadowOffset)*1.75,
+					'r': (this._options.get('radius')+this._shadowOffset)*1.25,
 					'cy': this._options.get('radius')*3.5
 				}, this._options.get('duration'));
 
@@ -140,7 +139,7 @@ if( !window['Rose'] ) {
 				this._options.get('duration'));
 
 			this._shadow.animateWith(this._circle, {
-					'r': this._options.get('radius')+this._shadowOffset,
+					'r': this._options.get('radius'),
 					'cy': this._options.get('radius')*3
 				}, this._options.get('duration'));
 

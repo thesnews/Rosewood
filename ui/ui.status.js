@@ -11,13 +11,17 @@
  * success status will have class="success").
  *
  * Options:
- *  - none
+ *  - container (string|DOMNode) the container element for the message
+ *      default: document.body
+ *  - id (string) the id for the 
+ *      default: 'rose_statusMessage'
  *
  * Events:
  *  - none
  *
  * Usage:
  * <code>
+ *  Rose.statusMessage.setOptions({'id': 'foo_bar'});
  *	Rose.statusMessage.display( 'This is a message!', 'warning' );
  * </code>
  * 
@@ -40,7 +44,20 @@ if( !window['Rose'] ) {
 		_message: false,
 		_type: false,
 		
+		_defaultOptions: $H({
+			container: $(document.body),
+			id: 'rose_statusMessage'
+		}),
+		
+		_options: $H({}),
+		
 		initialize: function() {
+			this.setOptions({});
+		},
+		
+		setOptions: function(opts) {
+			this._options = $H(opts);
+			this._options.combine( this._defaultOptions );
 		},
 		
 		display: function( message ) {
@@ -71,19 +88,7 @@ if( !window['Rose'] ) {
 			var winCoords = $(window).getCoordinates();
 
 			this._container = new Element( 'div', {
-				'styles': {
-					'position': 'fixed',
-					'top': 0,
-					'left': (winCoords.width/2 - 100),
-					'width': 200,
-					'height': 25,
-					'text-align': 'center',
-					'font-weight': 'bold',
-					'border-width': 1,
-					'border-style': 'solid',
-					'border-color': '#000',
-					'opacity': 0
-				},
+				'id': this._options.get('id'),
 				'tween': {
 					'duration': 250
 				}
@@ -101,7 +106,7 @@ if( !window['Rose'] ) {
 				});
 			}
 
-			$(document.body).adopt( this._container );
+			$(this._options.get('container')).adopt( this._container );
 		},
 		
 		_show: function() {
