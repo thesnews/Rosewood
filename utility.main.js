@@ -22,6 +22,15 @@ if( !window['Rose'] ) {
 	 * }}})
 	 */
 	
+	String.implement({
+		unencode: function() {
+			return decodeURIComponent(unescape(this));
+		},
+		encode: function() {
+			return escape(encodeURIComponent(this));
+		}
+	});
+
 	Element.implement({
 		noSelect: function() {
 			this.onselectstart = this.ondragstart = $lambda( false );
