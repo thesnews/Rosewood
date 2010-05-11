@@ -36,7 +36,7 @@
  *  - content (string|DOMElement): The content of the modal window
  *  - submit (string): The label for the submit button. Set to 'false' to disable
  *  - cancel (string|bool): The label for the cancel button. Set to 'false' to disable
- *  - loadingIndicator (string|bool): The path to a loading image. The image will load next to the buttons in the button bar. False to disable.
+ *  - loadingIndicator (bool): If true, a canvas based indicator is used.
  *  - mask (bool): Whether to use a page mask or not
  *  - destroyOnClose (bool): If true, modal will be destroyed when closed. Defaults to false.
  *  - width (int): Width of the content area
@@ -110,7 +110,7 @@ if( !window['Rose'] ) {
 			
 			destroyOnClose: false,
 			
-			loadingIndicator: false,
+			loadingIndicator: true,
 			
 			mask: true,
 			
@@ -260,12 +260,12 @@ if( !window['Rose'] ) {
 			}
 			
 			if( flag ) {
-				this._loadingIndicator.fade( 'show' );
+				this._loadingIndicator.show();
 				
 				return this;
 			}
 			
-			this._loadingIndicator.fade( 'hide' );
+			this._loadingIndicator.hide();
 			
 			return this;
 		},
@@ -410,11 +410,26 @@ if( !window['Rose'] ) {
 			this._buttonContainer.setStyle( 'display', 'none' );
 			
 			if( this._options.get( 'loadingIndicator' ) ) {
-				this._loadingIndicator = new Element( 'img', {
-					'src': this._options.get( 'loadingIndicator' )
-				}).fade( 'hide' );
+//				this._loadingIndicator = new Element( 'img', {
+//					'src': this._options.get( 'loadingIndicator' )
+//				}).fade( 'hide' );
 				
-				buttons.push( this._loadingIndicator );
+				var cont = new Element('div', {
+					'styles': {
+						'float': 'left',
+						'width': '24px',
+						'height': '24px',
+						'position': 'relative',
+						'top': '-3px'
+					}
+				});
+				
+				this._loadingIndicator = new Rose.ui.throbber(cont, {
+					'radius': 4,
+					'mask': false
+				});
+				
+				buttons.push( cont );
 			}
 			
 			// you can set 'submit' and 'cancel' to FALSE to hide them
