@@ -327,7 +327,9 @@ if( !window['Rose'] ) {
 				this._mask.tween( 'opacity', 0.25 );
 			}
 			
-			this._options.get( 'onOpen' ).run([]);
+			this._buttonContainer.getChildren('a').canvasButton();
+			
+			this._options.get( 'onOpen' ).bind(this).run([]);
 		},
 		
 		_hide: function() {
@@ -352,7 +354,7 @@ if( !window['Rose'] ) {
 			if( this._mask ) {
 				this._mask.tween( 'opacity', 0 );
 			}
-			this._options.get( 'onClose' ).run([]);
+			this._options.get( 'onClose' ).bind(this).run([]);
 		},
 		
 		_destroy: function() {
@@ -371,12 +373,12 @@ if( !window['Rose'] ) {
 		
 		_handleSubmit: function(e) {
 			e.stop();
-			this._options.get( 'onSubmit' ).run([]);	
+			this._options.get( 'onSubmit' ).bind(this).run([]);	
 		},
 		
 		_handleCancel: function(e) {
 			e.stop();
-			this._options.get( 'onCancel' ).run([]);
+			this._options.get( 'onCancel' ).bind(this).run([]);
 		
 			this._destroy();
 		},
