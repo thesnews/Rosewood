@@ -36,7 +36,22 @@ if( !window['Rose'] ) {
 			this.onselectstart = this.ondragstart = $lambda( false );
 			this.addEvent( 'mousedown', $lambda( false ) );
 			this.setStyle( '-moz-user-select', 'none' );		
+		},
+		// overriding the dispose
+		dispose: function() {
+			if( this.retrieve ) {
+				var watchers = this.retrieve('disposeWatchers', []);
+				watchers.each(function(el) { el.dispose(); });
+			}
+			return (this.parentNode) ? this.parentNode.removeChild(this) : this;
+		},
+		
+		disposeWith: function(e) {
+			var watchers = $(e).retrieve('disposeWatchers', []);
+			watchers.push(this);
+			$(e).store('disposeWatchers', watchers);
 		}
+
 	});
 
 })();
