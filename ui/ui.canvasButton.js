@@ -251,6 +251,11 @@ if( !window['Rose'] ) {
 				}.bind(this),
 				'mouseup':  function(e) {
 					this._button.rotate(0, true);
+					if( this._element.get('tag') == 'input' &&
+						this._element.get('type') == 'submit' &&
+						$(this._button.node).getParents('form').length ) {
+						$(this._button.node).getParents('form')[0].submit();
+					}
 				}.bind(this)
 			});
 			
