@@ -169,7 +169,7 @@ if( !window['Rose'] ) {
 				'styles': {
 					'position': 'absolute',
 					'bottom': 0,
-					'right': 0
+					'left': 0
 				}
 			});
 
@@ -411,29 +411,6 @@ if( !window['Rose'] ) {
 			this._buttonContainer.empty();
 			this._buttonContainer.setStyle( 'display', 'none' );
 			
-			if( this._options.get( 'loadingIndicator' ) ) {
-//				this._loadingIndicator = new Element( 'img', {
-//					'src': this._options.get( 'loadingIndicator' )
-//				}).fade( 'hide' );
-				
-				var cont = new Element('div', {
-					'styles': {
-						'float': 'left',
-						'width': '24px',
-						'height': '24px',
-						'position': 'relative',
-						'top': '-3px'
-					}
-				});
-				
-				this._loadingIndicator = new Rose.ui.throbber(cont, {
-					'radius': 4,
-					'mask': false
-				});
-				
-				buttons.push( cont );
-			}
-			
 			// you can set 'submit' and 'cancel' to FALSE to hide them
 			if( this._options.get( 'submit' ) ) {
 				buttons.push( new Element( 'a', {
@@ -455,6 +432,29 @@ if( !window['Rose'] ) {
 						'click': this._handleCancel.bind( this )
 					}
 				}));
+			}
+
+			if( this._options.get( 'loadingIndicator' ) ) {
+//				this._loadingIndicator = new Element( 'img', {
+//					'src': this._options.get( 'loadingIndicator' )
+//				}).fade( 'hide' );
+				
+				var cont = new Element('div', {
+					'styles': {
+						'float': 'left',
+						'width': '24px',
+						'height': '24px',
+						'position': 'relative',
+						'top': '-3px'
+					}
+				});
+				
+				this._loadingIndicator = new Rose.ui.throbber(cont, {
+					'radius': 4,
+					'mask': false
+				});
+				
+				buttons.push( cont );
 			}
 
 			if( !buttons.length ) {
