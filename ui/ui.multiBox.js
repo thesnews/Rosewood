@@ -78,7 +78,7 @@ if( !window['Rose'] ) {
 	
 	});
 	
-	Element.implements({
+	Element.implement({
 		multiBox: function() {
 			new MultiBox( this );
 			
