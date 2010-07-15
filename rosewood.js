@@ -450,8 +450,19 @@ if( !window['Rose'] ) {
 				'x': (this._dimensions.width/2)+10
 			});
 		
+			/* Ryan cleared up icons, moved them left a smidge
+			
 			this._primaryIcon = this._paper.image(path, 10,
 				(this._dimensions.height/2)-8, 16, 16);
+			*/
+			var heightOffset = this._dimensions.height;
+			
+			if( heightOffset%2 != 0 ) {
+				heightOffset--;
+			}
+			
+			this._primaryIcon = this._paper.image(path, 7,
+				(heightOffset/2)-8, 16, 16);
 		},
 				
 		setSecondaryIcon: function() {
@@ -474,9 +485,19 @@ if( !window['Rose'] ) {
 			});
 		
 		
-			
+			/* Ryan cleared up icons
 			this._secondaryIcon = this._paper.image(path, 
 				this._dimensions.width-16,	(this._dimensions.height/2)-2, 6, 4);
+			*/
+			
+			var heightOffset = this._dimensions.height;
+			
+			if( heightOffset%2 != 0 ) {
+				heightOffset--;
+			}
+			
+			this._secondaryIcon = this._paper.image(path, 
+				this._dimensions.width-16,	(heightOffset/2)-2, 6, 4);
 		},
 
 		setDisabled: function(flag) {
