@@ -165,7 +165,8 @@ if( !window['Rose'] ) {
 				'height': this._button.attr('height'),
 				'display': 'block',
 				'background': '#000',
-				'opacity': 0.01
+				'opacity': 0.01,
+				'z-index': 100000
 			});
 			if( this._disabled ) {
 				this._element.setStyle('display', 'none');
