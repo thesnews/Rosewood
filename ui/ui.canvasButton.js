@@ -326,6 +326,8 @@ if( !window['Rose'] ) {
 						'opacity': 1
 					});
 				}
+
+				this.registerClickTarget();
 			}
 		},
 		
