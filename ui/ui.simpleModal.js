@@ -22,6 +22,8 @@ if( !window['Rose'] ) {
 			
 			modalClass: 'modal',
 			
+			id: false,
+			
 			mask: true,
 			
 			content: false,
@@ -43,7 +45,7 @@ if( !window['Rose'] ) {
 			this._container = new Element('div', {
 				'class': this.options.modalClass,
 				styles: {
-					position: 'absolute',
+					position: 'fixed',
 					top: 0,
 					left: 0,
 					width: this.options.width,
@@ -53,10 +55,14 @@ if( !window['Rose'] ) {
 				tween: {
 					duration: 250
 				},
-				morhph: {
+				morph: {
 					duration: 250
 				}
 			}).adopt(this.options.content);
+
+			if( this.options.id ) {
+				this._container.set('id', this.options.id);
+			}
 
 			this._title = this._container.getFirst();
 			this._content = this._container.getFirst().getNext();
@@ -150,6 +156,8 @@ if( !window['Rose'] ) {
 			});
 			
 			this.options.onOpen.bind(this).run([]);
+			
+			return this;
 		}
 	});
 	
