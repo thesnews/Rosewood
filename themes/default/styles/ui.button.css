@@ -1,0 +1,32 @@
+.rose_buttonGroup, .rose_buttonContainer, .rose_buttonContainer > * {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+	.rose_button {
+		border: 1px solid #ccc;
+		padding: 3px 6px;
+		text-shadow: #fff 0px -1px 1px;
+		color: #333;
+		text-decoration: none;
+		background: #f1f1f1 url( ../images/ui_button_gradient.png ) repeat-x center -10px;
+	}
+	.rose_buttonContainer {
+		-moz-box-shadow: 1px 1px 4px #999;
+		-webkit-box-shadow: 1px 1px 4px #999;
+		box-shadow: 1px 1px 4px #999;
+		padding: 3px 0;
+		margin: 0 5px;
+	}
+	.rose_button:active {
+		background-position: 0 -70px;
+		position: relative;
+		top: 1px;
+		left: 1px;
+	}
+		.rose_button.blue {
+			background-color: #3B5997;
+			text-shadow: #666 0px -1px 1px;
+			color: #fff;
+		}
+	
