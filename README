@@ -9,3 +9,5 @@ License: MIT License <http://www.opensource.org/licenses/mit-license.php>
 The State News standardized javascript UI library. Some items are based on jQueryUI ports (noted where ported).
 
 You may also be interested in Mooniform <http://github.com/thesnews/Mooniform>
+
+The compiled dist includes RaphaelJS <http://raphaeljs.com>
