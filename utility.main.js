@@ -1,10 +1,10 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	/**
-	 * Rose.basePath (string)
+	 * rose.basePath (string)
 	 *
 	 * Contains the absolute base URL for the site (i.e. http://statenews.com/)
 	 * NOTE: this path contains a trailing slash, unlike every other path
@@ -17,10 +17,12 @@ if( !window['Rose'] ) {
 		base = base.substr( 0,	base.indexOf( 'index.php' ) );
 	}
 	
-	Rose.basePath = base;
+	rose.basePath = base;
 	/**
 	 * }}})
 	 */
+	 
+	rose.version = '2.0a';
 	
 	String.implement({
 		unencode: function() {
@@ -33,8 +35,8 @@ if( !window['Rose'] ) {
 
 	Element.implement({
 		noSelect: function() {
-			this.onselectstart = this.ondragstart = $lambda( false );
-			this.addEvent( 'mousedown', $lambda( false ) );
+			this.onselectstart = this.ondragstart = Function.from(false);
+			this.addEvent( 'mousedown', Function.from(false) );
 			this.setStyle( '-moz-user-select', 'none' );		
 		},
 		// overriding the dispose
@@ -54,4 +56,4 @@ if( !window['Rose'] ) {
 
 	});
 
-})();
+})(document.id);

@@ -1,9 +1,9 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
-	if( !Rose.ui ) { Rose.ui = {}; }
+	if( !rose.ui ) { rose.ui = {}; }
 
 	var InlineGallery = new Class({
 		Implements: Options,
@@ -13,9 +13,9 @@ if( !window['Rose'] ) {
 			captionSelector: '.caption',
 			authorSelector: '.byline',
 			
-			onLoad: $lambda,
-			onChange: $lambda,
-			onSelect: $lambda
+			onLoad: Function.from,
+			onChange: Function.from,
+			onSelect: Function.from
 		},
 		
 		container: false,
@@ -108,7 +108,7 @@ if( !window['Rose'] ) {
 			
 			if( authors ) {
 				var authorNames = [];
-				$H(data[0].image.authors).each(function(a) {
+				data[0].image.authors.every(function(a) {
 					authorNames.push(a.name.unencode());
 				});
 				authors.set('html', authorNames);
@@ -117,6 +117,6 @@ if( !window['Rose'] ) {
 
 	});
 
-	Rose.ui.inlineGallery = InlineGallery;
+	rose.ui.inlineGallery = InlineGallery;
 	
-}());
+})(document.id);

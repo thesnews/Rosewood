@@ -1,27 +1,25 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	var TabBox = new Class({
+		Implements: [Options],
 		
 		container: false,
 		children: false,
 		linkContainer: false,
 
-		_defaultOptions: $H({
+		options: {
 			linkContainerClass: 'tab-box-header',
 			linkActiveClass: 'tab-header-active'
-		}),
-		
-		_options: $H({}),
+		},
 		
 		initialize: function(el) {
 		
 			if( arguments[1] ) {
-				this._options = $H(arguments[1]);
+				this.setOptions(arguments[1]);
 			}
-			this._options.combine( this._defaultOptions );
 
 			this.container = el;
 			this.children = this.container.getChildren();
@@ -84,10 +82,10 @@ if( !window['Rose'] ) {
 		}
 	});
 	
-	if( !Rose.ui ) {
-		Rose.ui = {};
+	if( !rose.ui ) {
+		rose.ui = {};
 	}
 
-	Rose.ui.tabBox = TabBox;
+	rose.ui.tabBox = TabBox;
 	
-})();
+})(document.id);

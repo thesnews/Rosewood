@@ -1,5 +1,5 @@
 /**
- * Rose.ui.throbber
+ * rose.ui.throbber
  *
 
  * @author Mike Joseph <josephm5@msu.edu>
@@ -9,14 +9,15 @@
  * @license http://opensource.org/licenses/gpl-2.0.php GNU GPL 2.0
  */
 
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	var Throbber = new Class({
+		Implements: [Options],
 		
-		_defaultOptions: $H({
+		options: {
 			stroke: '#999',
 			fill: 'r(0.25, 0.25)#fff-#ccc',
 			shadowFill: 'r(0.5, 0.5)#000-#fff',
@@ -28,10 +29,8 @@ if( !window['Rose'] ) {
 			maskOpacity: 0.75,
 			textColor: '#fff',
 			text: 'Working...'
-		}),
+		},
 		
-		_options: $H({}),
-
 		_container: false,
 		
 		_paper: false,
@@ -47,7 +46,7 @@ if( !window['Rose'] ) {
 			this._container = $(el);
 
 			if( arguments[1] ) {
-				this._options = $H(arguments[1]);
+				this.setOptions(arguments[1]);
 			}
 
 			this._options.combine( this._defaultOptions );
@@ -147,8 +146,8 @@ if( !window['Rose'] ) {
 		
 	});
 	
-	if( !Rose.ui ) {
-		Rose.ui = {};
+	if( !rose.ui ) {
+		rose.ui = {};
 	}
-	Rose.ui.throbber = Throbber;
-})();
+	rose.ui.throbber = Throbber;
+})(document.id);

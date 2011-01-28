@@ -1,12 +1,12 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
-	if( !Rose.ui ) { Rose.ui = {}; }
+	if( !rose.ui ) { rose.ui = {}; }
 
 	var FormatBar = new Class({
-		Implements: Options,
+		Implements: [Options],
 		
 		options:	{
 			buttons: {},
@@ -91,11 +91,10 @@ if( !window['Rose'] ) {
 			this._element = $(el);
 			
 			if( this.options.buttons ) {
-				this.options.buttons = $H(this.options.buttons).combine(
-					$H(this._buttons)
-				);
+				this.options.buttons = this.options.buttons.merge(
+					this._buttons);
 			} else {
-				this.options.buttons = $H(this._buttons);
+				this.options.buttons = this._buttons;
 			}
 			
 			if( this.options.onInject ) {
@@ -173,5 +172,5 @@ if( !window['Rose'] ) {
 		}
 	});
 	
-	Rose.ui.formatBar = FormatBar;
-})();
+	rose.ui.formatBar = FormatBar;
+})(document.id);

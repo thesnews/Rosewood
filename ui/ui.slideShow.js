@@ -1,15 +1,17 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	var SlideShow = new Class({
+	
+		Implements: [Options],
 
 		_container: false,
 		_slides: false,
 		_pagerContainer: false,
 		
-		_defaultOptions: $H({
+		options: {
 			autoStart: true,
 			pauseOnHover: true,
 			
@@ -20,13 +22,11 @@ if( !window['Rose'] ) {
 			
 			showPagers: false,
 			
-			onStart: $empty,
-			onStop: $empty,
-			onNext: $empty,
-			onPrevious: $empty
-		}),
-		
-		_options: $H({}),
+			onStart: function(){},
+			onStop: function(){},
+			onNext: function(){},
+			onPrevious: function(){}
+		},
 		
 		_currentIndex: 0,
 		
@@ -41,10 +41,9 @@ if( !window['Rose'] ) {
 			this._container = $(el);
 			
 			if( arguments[1] ) {
-				this._options = $H(arguments[1]);
+				this.setOptions(arguments[1]);
 			}
-			this._options.combine( this._defaultOptions );
-			
+						
 			this._slides = el.getChildren();
 			var minHeight = 10000;
 			
@@ -54,9 +53,8 @@ if( !window['Rose'] ) {
 			});
 			
 			this._pagerContainer = new Element('div');
-			if( this._options.get('pagerContainerClass') ) {
-				this._pagerContainer.addClass(this._options.get(
-					'pagerContainerClass'));
+			if( this.options.pagerContainerClass ) {
+				this._pagerContainer.addClass(this.options.pagerContainerClass);
 			}
 			
 			this._pagerContainer.injectBefore(this._container);
@@ -71,8 +69,8 @@ if( !window['Rose'] ) {
 					'left': 0
 				});
 				
-				if( this._options.get('slideClass') ) {
-					el.addClass(this._options.get('slideClass'));
+				if( this.options.slideClass ) {
+					el.addClass(this.options.slideClass);
 				}
 
 				var desc = el.getLast();
@@ -89,8 +87,8 @@ if( !window['Rose'] ) {
 					'width': width-(offset*2)
 				});
 				
-				if( this._options.get('descriptionClass') ) {
-					desc.addClass(this._options.get('descriptionClass'));
+				if( this.options.descriptionClass ) {
+					desc.addClass(this.options.descriptionClass);
 				}
 				
 				if( idx > 0 ) {
@@ -111,7 +109,7 @@ if( !window['Rose'] ) {
 		
 		start: function() {
 			this._timer = setInterval(this._boundSlideEvent, 5000);
-			if( this._options.get('pauseOnHover') ) {
+			if( this.options.pauseOnHover ) {
 				this._container.addEvent('mouseenter', this._boundPauseEvent);
 				this._container.addEvent('mouseleave', this._boundPlayEvent);
 			}
@@ -123,7 +121,7 @@ if( !window['Rose'] ) {
 		
 		stop: function() {
 			clearInterval(this._timer);
-			if( this._options.get('pauseOnHover') ) {
+			if( this.options.pauseOnHover ) {
 				this._container.removeEvent('mouseenter',
 					this._boundPauseEvent);
 				this._container.removeEvent('mouseleave', this._boundPlayEvent);
@@ -155,7 +153,7 @@ if( !window['Rose'] ) {
 			
 			var cls = false;
 			
-			if( (cls = this._options.get('pagerActiveClass')) ) {
+			if( (cls = this.options.pagerActiveClass) ) {
 				this._pagerContainer.getChildren().removeClass(cls);
 				this._pagerContainer.getChildren('.pager'+num).addClass(cls);
 			}
@@ -191,4 +189,4 @@ if( !window['Rose'] ) {
 		}
 	});
 
-})();
+})(document.id);

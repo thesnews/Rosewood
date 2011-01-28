@@ -1,5 +1,5 @@
 /**
- * Rose.ui.statusMessage
+ * rose.ui.statusMessage
  *
  * Display a status message at the top of the page (overlays the ticker element)
  * There are 3 status message types:
@@ -21,8 +21,8 @@
  *
  * Usage:
  * <code>
- *  Rose.statusMessage.setOptions({'id': 'foo_bar'});
- *	Rose.statusMessage.display( 'This is a message!', 'warning' );
+ *  rose.statusMessage.setOptions({'id': 'foo_bar'});
+ *	rose.statusMessage.display( 'This is a message!', 'warning' );
  * </code>
  * 
  *
@@ -33,31 +33,29 @@
  * @license http://opensource.org/licenses/gpl-2.0.php GNU GPL 2.0
  */
 
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	var StatusMessage = new Class({
+		
+		Implements: [Options],
 		
 		_container: false,
 		_message: false,
 		_type: false,
 		
-		_defaultOptions: $H({
+		options: {
 			container: $(document.body),
 			id: 'rose_statusMessage'
-		}),
-		
-		_options: $H({}),
+		},
 		
 		initialize: function() {
-			this.setOptions({});
 		},
 		
 		setOptions: function(opts) {
-			this._options = $H(opts);
-			this._options.combine( this._defaultOptions );
+			this.setOptions(opts);
 		},
 		
 		display: function( message ) {
@@ -88,7 +86,7 @@ if( !window['Rose'] ) {
 			var winCoords = $(window).getCoordinates();
 
 			this._container = new Element( 'div', {
-				'id': this._options.get('id'),
+				'id': this.options.id,
 				'tween': {
 					'duration': 250
 				}
@@ -106,7 +104,7 @@ if( !window['Rose'] ) {
 				});
 			}
 
-			$(this._options.get('container')).adopt( this._container );
+			$(this.options.container).adopt( this._container );
 		},
 		
 		_show: function() {
@@ -141,8 +139,8 @@ if( !window['Rose'] ) {
 	});
 	
 	// singleton yo, stick it into the global namespace
-	if( !Rose.ui ) {
-		Rose.ui = {};
+	if( !rose.ui ) {
+		rose.ui = {};
 	}
-	Rose.ui.statusMessage = new StatusMessage;
-})();
+	rose.ui.statusMessage = new StatusMessage;
+})(document.id);

@@ -1,7 +1,7 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 	var Modal2 = new Class({
 		
 		Implements: Options,
@@ -31,10 +31,10 @@ if( !window['Rose'] ) {
 			height: 150,
 			width: 300,
 			
-			onSubmit: $empty,
-			onCancel: $empty,
-			onOpen: $empty,
-			onClose: $empty
+			onSubmit: function(){},
+			onCancel: function(){},
+			onOpen: function(){},
+			onClose: function(){}
 		},
 		
 		
@@ -96,7 +96,7 @@ if( !window['Rose'] ) {
 		hide: function() {
 			// sets the callback to be called when the morph transition
 			// completes
-			var callback = $empty;
+			var callback = function(){};
 			if( arguments[0] ) {
 				callback = arguments[0];
 			}
@@ -111,7 +111,7 @@ if( !window['Rose'] ) {
 				'top': (this._container.getCoordinates().top + 50)
 			});
 			
-			this.options.onClose.bind(this).run([]);		
+			this.options.onClose.bind(this).apply();		
 		},
 		
 		close: function() {
@@ -140,7 +140,7 @@ if( !window['Rose'] ) {
 			
 			// sets the callback to be called when the morph transition
 			// completes
-			var callback = $empty;
+			var callback = function(){};
 			if( arguments[0] ) {
 				callback = arguments[0];
 			}
@@ -155,16 +155,16 @@ if( !window['Rose'] ) {
 				'top': topOffset
 			});
 			
-			this.options.onOpen.bind(this).run([]);
+			this.options.onOpen.bind(this).apply();
 			
 			return this;
 		}
 	});
 	
 	// stick it into the global namespace
-	if( !Rose.ui ) {
-		Rose.ui = {};
+	if( !rose.ui ) {
+		rose.ui = {};
 	}
-	Rose.ui.simpleModal = Modal2;
+	rose.ui.simpleModal = Modal2;
 
-})();
+})(document.id);

@@ -1,22 +1,23 @@
-if( !window['Rose'] ) {
-	Rose = {};
+if( !window['rose'] ) {
+	rose = {};
 }
-(function() {
+(function($) {
 
 	var CanvasButton = new Class({
-
+		Implements: [Options],
+		
 		_element: false,
 
-		_defaultOptions: $H({
+		options: {
 			buttonClass: 'rose_canvasButton',
 			borderRadius: 3,
 			style: false,
 			defaultStyle: false,
 			disabledStyle: false
-		}),
+		},
 		
-		_styles: $H({
-			'default': {
+		_styles: {
+			'def': {
 				fill: '270-#f1f1f1-#e1e1e1:90-#999',
 				stroke: '#c0c0c0',
 				color: '#333',
@@ -34,9 +35,7 @@ if( !window['Rose'] ) {
 				color: '#fff',
 				shadow: '#333'
 			}
-		}),
-		
-		_options: $H({}),
+		},
 		
 		_disabled: false,
 		
@@ -62,10 +61,9 @@ if( !window['Rose'] ) {
 		
 		initialize: function(el) {
 			if( arguments[1] ) {
-				this._options = $H(arguments[1]);
+				this.setOptions(arguments[1]);
 			}
 
-			this._options.combine(this._defaultOptions);
 			this._element = $(el);
 			
 			var coords = this._element.getCoordinates();
@@ -86,8 +84,8 @@ if( !window['Rose'] ) {
 			}
 			});
 			
-			if( this._options.get('buttonClass') ) {
-				this.container.addClass(this._options.get('buttonClass'));
+			if( this.options.buttonClass ) {
+				this.container.addClass(this.options.buttonClass);
 			}
 			
 			if( parseInt(this._element.getStyle('width')) ) {
@@ -110,7 +108,7 @@ if( !window['Rose'] ) {
 
 			this._button = this._paper.rect(0, 0, this._dimensions.innerWidth,
 				this._dimensions.innerHeight,
-				this._options.get('borderRadius'));
+				this.options.borderRadius);
 				
 
 			this.setText(text);
@@ -118,30 +116,29 @@ if( !window['Rose'] ) {
 			this.setPrimaryIcon();
 			this.setSecondaryIcon();
 			
-			if( !this._options.get('defaultStyle') ) {
-				this._options.set('defaultStyle', this._styles.get('default'));
+			if( !this.options.defaultStyle ) {
+				this.options.defaultStyle = this._styles.def;
 			}
 			
-			if( this._options.get('style') ) {
-				this._options.set('defaultStyle', this._options.get('style'));
+			if( this.options.style ) {
+				this.options.defaultStyle = this.options.style;
 			}
 			
-			if( !this._options.get('disabledStyle') ) {
-				this._options.set('disabledStyle', this._options.get(
-					'defaultStyle'));
+			if( !this.options.disabledStyle ) {
+				this.options.disabledStyle = this.options.defaultStyle;
 			}
 			
 			if( this._element.get('class').length ) {
 			var classes = this._element.get('class').split(' ');
 			classes.each(function(val) {
-				if( this._styles.get(val) ) {
+				if( this._styles.val ) {
 					style = val;
 					return;
 				}
 			}.bind(this));
 			}
 			
-			this.setStyle(this._options.get('defaultStyle'));
+			this.setStyle(this.options.defaultStyle);
 			this._registerEvents();
 			
 			this.registerClickTarget();
@@ -302,7 +299,7 @@ if( !window['Rose'] ) {
 			this._disabled = flag;
 			if( flag ) {
 				this._element.setStyle('display', 'none');
-				this.setStyle(this._options.get('disabledStyle'));
+				this.setStyle(this.options.disabledStyle);
 				if( this._primaryIcon ) {
 					this._primaryIcon.attr({
 						'opacity': 0.5
@@ -315,7 +312,7 @@ if( !window['Rose'] ) {
 				}
 			} else {
 				this._element.setStyle('display', '');
-				this.setStyle(this._options.get('defaultStyle'));
+				this.setStyle(this.options.defaultStyle);
 				if( this._primaryIcon ) {
 					this._primaryIcon.attr({
 						'opacity': 1
@@ -391,7 +388,7 @@ if( !window['Rose'] ) {
 				var obj = new CanvasButton(el, args);
 				el.store('canvasButton', obj);
 
-				var offset = obj._options.get('borderRadius');
+				var offset = obj.options.borderRadius;
 				
 				// first, we deal with all the buttons after the first one
 				if( idx >= 1 ) {
@@ -406,7 +403,7 @@ if( !window['Rose'] ) {
 					// the width by just as much. This clips the edge of the
 					// button off
 					obj._button.attr({
-						'x': '-'+obj._options.get('borderRadius'),
+						'x': '-'+obj.options.borderRadius,
 						'width': obj._button.attr('width')+offset
 					});
 					
@@ -429,4 +426,4 @@ if( !window['Rose'] ) {
 		}
 	});
 		
-})();
+})(document.id);
