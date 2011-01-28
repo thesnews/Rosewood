@@ -24,7 +24,7 @@ if( !window['rose'] ) {
 			
 			id: false,
 			
-			mask: true,
+			mask: false,
 			
 			content: false,
 			
@@ -41,6 +41,10 @@ if( !window['rose'] ) {
 		initialize: function() {
 			
 			this.setOptions(arguments[0]);
+
+			if( this.options.content instanceof Element ) {
+				this.options.content = this.options.content.getChildren();
+			}
 
 			this._container = new Element('div', {
 				'class': this.options.modalClass,
