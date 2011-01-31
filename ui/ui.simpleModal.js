@@ -85,9 +85,13 @@ if( !window['rose'] ) {
 			
 			if( this._buttons ) {
 				this._buttons.getElements('a.cancel').addEvent('click',
-					this.options.onCancel.bind(this));
+					this.options.onCancel.bind(this,
+						this._buttons.getElements('a.cancel').pop()
+					));
 				this._buttons.getElements('a.submit').addEvent('click',
-					this.options.onSubmit.bind(this));
+					this.options.onSubmit.bind(this,
+						this._buttons.getElements('a.submit').pop()
+					));
 			}
 			
 			$(document.body).adopt(this._container);
